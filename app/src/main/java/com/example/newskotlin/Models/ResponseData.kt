@@ -1,12 +1,15 @@
 package com.example.newskotlin.Models
 
+import com.google.gson.annotations.SerializedName
+
 data class ResponseData(
-    val status: String,
-    val lastName: String,
-    val age: Int
+    @SerializedName("status" ) var status : String? = null,
+    @SerializedName("totalResults" ) var totalResults : Int? = null,
+    @SerializedName("articles" ) var articles : List<Articles>? = null,
+
 ) {
-    fun getData(): String {
-        return "$status $lastName $age"
+    fun getResponseData(): String {
+        return "$status $totalResults $articles"
     }
 
 }

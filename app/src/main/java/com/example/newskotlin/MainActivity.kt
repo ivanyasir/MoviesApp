@@ -2,6 +2,7 @@ package com.example.newskotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.newskotlin.Models.ResponseData
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,14 +22,14 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                 if (response.isSuccessful) {
                     val data: ResponseData? = response.body()
-                    // Handle the data here
+                    Log.d("mainActivity", "onResponse: $data")
                 } else {
-                    // Handle error
+                    Log.d("mainActivity", "onResponse: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                // Handle network error
+                Log.d("mainActivity", "onFailure: ${t.message}")
             }
         })
     }
