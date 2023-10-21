@@ -15,6 +15,13 @@
         android:theme="@style/Theme.NewsKotlin"
         tools:targetApi="31">
         <activity
+            android:name=".ListMoviesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ContentDetailActivity"
             android:exported="false">
             <meta-data

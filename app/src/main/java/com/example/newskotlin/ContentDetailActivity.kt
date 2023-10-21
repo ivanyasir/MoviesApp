@@ -32,7 +32,7 @@ class ContentDetailActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(receivedItem.urlToImage)
-            .centerCrop() // You can customize the image loading options as needed
+            .centerCrop()
             .into(img1)
     }
 }
