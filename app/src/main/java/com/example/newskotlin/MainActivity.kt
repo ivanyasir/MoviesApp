@@ -1,36 +1,85 @@
 package com.example.newskotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.example.newskotlin.Models.ResponseData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.widget.LinearLayout
+
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var lv_general: LinearLayout
+    private lateinit var lv_business: LinearLayout
+    private lateinit var lv_entertainment: LinearLayout
+    private lateinit var lv_health: LinearLayout
+    private lateinit var lv_science: LinearLayout
+    private lateinit var lv_sports: LinearLayout
+    private lateinit var lv_technology: LinearLayout
+    private lateinit var lv_all_categories: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Request Data from API
-        val myApi = RetrofitClient.retrofit.create(InterfaceAPI::class.java)
+        // initializing views
+        iniView()
 
-        val call: Call<ResponseData> = myApi.getData()
+        // initializing buttons
+        initEvent()
 
-        call.enqueue(object : Callback<ResponseData> {
-            override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-                if (response.isSuccessful) {
-                    val data: ResponseData? = response.body()
-                    Log.d("mainActivity", "onResponse: $data")
-                } else {
-                    Log.d("mainActivity", "onResponse: ${response.code()}")
-                }
-            }
+    }
 
-            override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                Log.d("mainActivity", "onFailure: ${t.message}")
-            }
-        })
+    private fun iniView() {
+        lv_general = findViewById<LinearLayout>(R.id.lv_general)
+        lv_business = findViewById<LinearLayout>(R.id.lv_busisness)
+        lv_entertainment = findViewById<LinearLayout>(R.id.lv_entertainment)
+        lv_health = findViewById<LinearLayout>(R.id.lv_health)
+        lv_science = findViewById<LinearLayout>(R.id.lv_science)
+        lv_sports = findViewById<LinearLayout>(R.id.lv_sports)
+        lv_technology = findViewById<LinearLayout>(R.id.lv_technology)
+        lv_all_categories = findViewById<LinearLayout>(R.id.lv_all_categories)
+    }
+
+    private fun initEvent() {
+        lv_general.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "general")
+            startActivity(intent)
+        }
+        lv_business.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "business")
+            startActivity(intent)
+        }
+        lv_entertainment.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "entertainment")
+            startActivity(intent)
+        }
+        lv_health.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "health")
+            startActivity(intent)
+        }
+        lv_science.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "science")
+            startActivity(intent)
+        }
+        lv_sports.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "sports")
+            startActivity(intent)
+        }
+        lv_technology.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "technology")
+            startActivity(intent)
+        }
+        lv_all_categories.setOnClickListener {
+            val intent = Intent(this, ContentListActivity::class.java)
+            intent.putExtra("categories", "")
+            startActivity(intent)
+        }
     }
 }

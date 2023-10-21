@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">NewsKotlin</string>
+    <string name="app_name">News App Ivan V Yasir</string>
+    <string name="business">Business</string>
+    <string name="categories">Categories</string>
+    <string name="all_categories">All Categories</string>
+    <string name="technology">Technology</string>
+    <string name="sports">Sports</string>
+    <string name="science">Science</string>
+    <string name="health">Health</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="general">General</string>
+    <string name="news">News</string>
 </resources>

@@ -1,11 +1,16 @@
 package com.example.newskotlin
 
+import android.hardware.usb.UsbEndpoint
 import com.example.newskotlin.Models.ResponseData
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface InterfaceAPI {
 
-    @GET("everything?q=tesla&from=2023-09-20&sortBy=publishedAt&apiKey=1c3228574a4c48d39c1940a26da79443")
-    fun getData(): Call<ResponseData>
+    @GET("top-headlines")
+    fun getData(@Query("country") country: String,
+                @Query("category") category: String,
+                @Query("apiKey") apiKey: String,
+    ): Call<ResponseData>
 }

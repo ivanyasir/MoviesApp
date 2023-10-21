@@ -1,6 +1,7 @@
 package com.example.newskotlin.Models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Articles(
     @SerializedName("source") var source: Sources? = null,
@@ -12,7 +13,7 @@ data class Articles(
     @SerializedName("publishedAt") var publishedAt: String? = null,
     @SerializedName("content") var content: String? = null,
 
-    ) {
+    ) : Serializable {
     fun getArticles(): String {
         return "$source $author $title $description $url $urlToImage $publishedAt $content"
     }
