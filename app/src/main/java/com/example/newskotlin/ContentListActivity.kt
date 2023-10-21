@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newskotlin.Adapters.ListTitleAdapter
 import com.example.newskotlin.Models.Articles
 import com.example.newskotlin.Models.ResponseData
+import com.example.newskotlin.Services.InterfaceAPI
+import com.example.newskotlin.Services.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

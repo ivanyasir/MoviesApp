@@ -1,4 +1,4 @@
-package com.example.newskotlin
+package com.example.newskotlin.Services
 
 import android.hardware.usb.UsbEndpoint
 import com.example.newskotlin.Models.ResMoviesByGenre

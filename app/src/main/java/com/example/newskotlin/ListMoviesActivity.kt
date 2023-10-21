@@ -9,8 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newskotlin.Adapters.ListMoviesByGenreAdapter
-import com.example.newskotlin.Adapters.ListTitleAdapter
 import com.example.newskotlin.Models.*
+import com.example.newskotlin.Services.InterfaceAPI
+import com.example.newskotlin.Services.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +67,6 @@ class ListMoviesActivity : AppCompatActivity(), ListMoviesByGenreAdapter.OnItemC
     }
 
     override fun onItemClick(item: Results) {
-       Toast.makeText(this@ListMoviesActivity, "Coming Soon... \nNeed more times of development..", Toast.LENGTH_SHORT).show()
+       Toast.makeText(applicationContext, "Coming Soon... \nNeed more times of development..", Toast.LENGTH_SHORT).show()
     }
 }

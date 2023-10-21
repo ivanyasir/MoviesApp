@@ -1,4 +1,4 @@
-package com.example.newskotlin
+package com.example.newskotlin.Services
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
