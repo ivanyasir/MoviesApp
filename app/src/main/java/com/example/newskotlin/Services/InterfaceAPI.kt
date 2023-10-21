@@ -2,14 +2,12 @@ package com.example.newskotlin.Services
 
 import android.hardware.usb.UsbEndpoint
 import com.example.newskotlin.Models.ResMoviesByGenre
+import com.example.newskotlin.Models.ResTrailer
 import com.example.newskotlin.Models.ResponseData
 import com.example.newskotlin.Models.ResponseMovies
 import org.intellij.lang.annotations.Language
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface InterfaceAPI {
 
@@ -24,4 +22,7 @@ interface InterfaceAPI {
 
     @GET("discover/movie")
     fun getMoviesByGenre(@Header("Authorization") token: String, @Query("with_genres") genre: String) : Call<ResMoviesByGenre>
+
+    @GET("movie/{key}/videos")
+    fun getTrailer(@Header("Authorization") token: String, @Path("key") key:String): Call<ResTrailer>
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newskotlin.Adapters.ListTitleAdapter
@@ -33,7 +34,6 @@ class ContentListActivity : AppCompatActivity(), ListTitleAdapter.OnItemClickLis
         // preset data
         var country = "us"
         var category = ""
-//        var pageSize = "\""
         val apiKey = Constans.api_key
 
         val categories = intent.getStringExtra("categories")
@@ -70,6 +70,11 @@ class ContentListActivity : AppCompatActivity(), ListTitleAdapter.OnItemClickLis
                 override fun onFailure(call: Call<ResponseData>, t: Throwable) {
                     loading.visibility = View.GONE
                     Log.d("mainActivity", "onFailure: ${t.message}")
+
+                    if (t.message == "timeout"){
+                        finish()
+                        Toast.makeText(this@ContentListActivity, "Gagal terhubung pada Server, Mohon Ulangi kembali..", Toast.LENGTH_SHORT).show()
+                    }
                 }
             })
     }
