@@ -1,25 +1,21 @@
-package com.example.newskotlin
+package com.example.newskotlin.Views.Movies
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newskotlin.Adapters.GenresAdapter
+import com.example.newskotlin.Views.News.ContentListActivity
 import com.example.newskotlin.Models.Genres
-import com.example.newskotlin.Models.ResponseMovies
-import com.example.newskotlin.Services.InterfaceAPI
-import com.example.newskotlin.Services.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.newskotlin.R
 
 
-class MainActivity : AppCompatActivity(), GenresAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), MoviesContract.View, GenresAdapter.OnItemClickListener {
 
     private lateinit var lv_general: LinearLayout
     private lateinit var lv_business: LinearLayout
@@ -32,6 +28,7 @@ class MainActivity : AppCompatActivity(), GenresAdapter.OnItemClickListener {
     private lateinit var loading: ProgressBar
     private lateinit var rvGenres: RecyclerView
     lateinit var adapter: GenresAdapter
+    private lateinit var moviesPresenter: MoviePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,38 +40,10 @@ class MainActivity : AppCompatActivity(), GenresAdapter.OnItemClickListener {
         // initializing buttons
         initEvent()
 
-        rvGenres.layoutManager = LinearLayoutManager(this)
+        moviesPresenter = MoviePresenter(this)
+        moviesPresenter.getData()
 
-        val myApi = RetrofitClient.retrofit2.create(InterfaceAPI::class.java)
-        loading.visibility = View.VISIBLE
-        val call: Call<ResponseMovies> = myApi.getMovies("Bearer ${Constans.token_bearer}", "en")
-        call.enqueue(
-            object : Callback<ResponseMovies> {
-                override fun onResponse(call: Call<ResponseMovies>, response: Response<ResponseMovies>) {
-                    Log.d("mainActivity", response.raw().request().url().toString())
-                    if (response.isSuccessful) {
-                        loading.visibility = View.GONE
-                        val data: ResponseMovies? = response.body()
-                        Log.d("log", "onResponse: $data")
 
-                        if (response.body()?.genres != null) {
-                            loading.visibility = View.GONE
-                            adapter = GenresAdapter(response.body()!!.genres!!, this@MainActivity)
-                            rvGenres.adapter = adapter
-                            Log.d("log", response.body()!!.genres!!.size.toString())
-                        }
-                    } else {
-                        loading.visibility = View.GONE
-                        Log.d("log", "onResponse: ${response.code()}")
-                        Log.d("log", "onResponse: ${response.message()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<ResponseMovies>, t: Throwable) {
-                    loading.visibility = View.GONE
-                    Log.d("log", "onFailure: ${t.message}")
-                }
-            })
     }
 
     private fun iniView() {
@@ -86,8 +55,6 @@ class MainActivity : AppCompatActivity(), GenresAdapter.OnItemClickListener {
         lv_sports = findViewById<LinearLayout>(R.id.lv_sports)
         lv_technology = findViewById<LinearLayout>(R.id.lv_technology)
         lv_all_categories = findViewById<LinearLayout>(R.id.lv_all_categories)
-        loading = findViewById<ProgressBar>(R.id.loading)
-        rvGenres = findViewById<RecyclerView>(R.id.rv_genres)
     }
 
     private fun initEvent() {
@@ -138,5 +105,29 @@ class MainActivity : AppCompatActivity(), GenresAdapter.OnItemClickListener {
         i.putExtra("genre", item.name)
         i.putExtra("genres", item)
         startActivity(i)
+    }
+
+    override fun initActivity() {
+
+        loading = findViewById<ProgressBar>(R.id.loading)
+        rvGenres = findViewById<RecyclerView>(R.id.rv_genres)
+    }
+
+    override fun onLoading(loadingState: Boolean) {
+        if (loadingState){
+            loading.visibility = View.VISIBLE
+        } else {
+            loading.visibility = View.GONE
+        }
+    }
+
+    override fun onResult(dataModel: List<Genres>) {
+        rvGenres.layoutManager = LinearLayoutManager(this)
+        adapter = GenresAdapter(dataModel, this@MainActivity)
+        rvGenres.adapter = adapter
+    }
+
+    override fun onMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

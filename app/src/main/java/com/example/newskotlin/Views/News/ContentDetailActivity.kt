@@ -1,4 +1,4 @@
-package com.example.newskotlin
+package com.example.newskotlin.Views.News
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.newskotlin.Models.Articles
+import com.example.newskotlin.R
 
 class ContentDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

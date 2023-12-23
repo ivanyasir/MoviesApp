@@ -7,7 +7,7 @@
     android:scrollbars="none"
     android:paddingHorizontal="20dp"
     android:paddingVertical="20dp"
-    tools:context=".ContentDetailActivity">
+    tools:context=".Views.News.ContentDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

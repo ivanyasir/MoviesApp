@@ -8,18 +8,37 @@
     android:paddingHorizontal="20dp"
     android:paddingVertical="20dp"
     android:scrollbars="none"
-    tools:context=".MainActivity">
+    tools:context=".Views.Movies.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+<!--        movies row-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/categories2"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/categories"
             android:textColor="@color/black"
+            android:layout_marginTop="30dp"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -158,24 +177,6 @@
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>
-
-<!--        movies row-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/categories2"
-            android:textColor="@color/black"
-            android:layout_marginTop="30dp"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_genres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-        </androidx.recyclerview.widget.RecyclerView>
 
         <ProgressBar
             android:id="@+id/loading"
